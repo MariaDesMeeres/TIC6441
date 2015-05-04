@@ -4,3 +4,6 @@ E:\Documentos\tic6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\OpenWeathe
 E:\Documentos\tic6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\OpenWeatherMapApiClient\obj\x86\Debug\OpenWeatherMapApiClient.pdb
 E:\Documentos\tic6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\OpenWeatherMapApiClient\obj\x86\Debug\OpenWeatherMapApiClient.csprojResolveAssemblyReference.cache
 E:\Documentos\tic6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\OpenWeatherMapApiClient.exe.config
+C:\Users\Maria\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\OpenWeatherMapApiClient.exe.config
+C:\Users\Maria\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\obj\x86\Debug\OpenWeatherMapApiClient.exe
+C:\Users\Maria\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\obj\x86\Debug\OpenWeatherMapApiClient.pdb

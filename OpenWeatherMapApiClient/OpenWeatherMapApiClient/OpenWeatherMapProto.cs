@@ -12,7 +12,7 @@ namespace OpenWeatherMapApiClient
     {
         public enum DataMode {JSON, XML };
      
-        //**********************************************************************
+        //*******************************CONSTRUCTOR***************************************
         public OpenWeatherMapProto()
         {
 
