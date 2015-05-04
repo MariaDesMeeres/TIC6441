@@ -1,0 +1,11 @@
+{"coord":{"lon":-4.42,"lat":36.72},
+"sys":{"message":0.0365,"country":"ES","sunrise":1422602454,"sunset":1422639665},
+"weather":[{"id":804,"main":"Clouds","description":"nubes","icon":"04d"}],
+"base":"cmc stations",
+"main":{"temp":16.484,"temp_min":16.484,"temp_max":16.484,"pressure":1005.91,"sea_level":1022.98,"grnd_level":1005.91,"humidity":90},
+"wind":{"speed":9.12,"deg":267.001},
+"clouds":{"all":92},
+"dt":1422626459,
+"id":2514256,
+"name":"Malaga",
+"cod":200}
