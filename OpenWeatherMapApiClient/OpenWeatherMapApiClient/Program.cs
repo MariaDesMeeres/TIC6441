@@ -47,8 +47,9 @@ namespace OpenWeatherMapApiClient
             usageText += "  /h or /forecast3h   set 3 hours interval forecast query type\n";
             usageText += "  /d or /daily        set daily forecast query type\n";
 
+            args = new string[] { "/F" ,"/I","2514256" };
             argsCount = args.Length;
-
+           
             System.Console.WriteLine("Arguments number: " + args.Length);
             foreach (string arg in args)
             {

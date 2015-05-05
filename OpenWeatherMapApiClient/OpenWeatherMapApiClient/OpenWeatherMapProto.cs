@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Runtime.Serialization.Json;
+using OpenWeatherMap.Model;
 
 namespace OpenWeatherMapApiClient
 {
@@ -355,11 +356,7 @@ namespace OpenWeatherMapApiClient
 
                 DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(OWM_Historical));
 
-                
-
                 object objResponse = jsonSerializer.ReadObject(responseStream);
-
-                
 
                 OWM_Historical historical = (OWM_Historical)objResponse;
 
