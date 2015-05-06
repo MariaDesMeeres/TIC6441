@@ -15,3 +15,10 @@ C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiCl
 C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\obj\x86\Debug\OpenWeatherMapApiClient.pdb
 C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\OpenWeatherMap.Model.dll
 C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\OpenWeatherMap.Model.pdb
+C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\EntityFramework.dll
+C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\EntityFramework.xml
+C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\Mono.Security.dll
+C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\OpenWeatherMap.Common.dll
+C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\OpenWeatherMap.Common.pdb
