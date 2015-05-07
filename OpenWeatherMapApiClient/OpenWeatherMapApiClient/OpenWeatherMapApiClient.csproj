@@ -83,6 +83,10 @@
       <Project>{c5941305-24ad-4053-af1e-dee28480ef2f}</Project>
       <Name>OpenWeatherMap.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenWeatherMapApi.Domain\OpenWeatherMapApi.Domain.csproj">
+      <Project>{3a1e4074-4a1d-43f1-828f-721e122bfee1}</Project>
+      <Name>OpenWeatherMapApi.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

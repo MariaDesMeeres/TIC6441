@@ -11,11 +11,57 @@ namespace OpenWeatherMap.Model
 {
     [Table("OWM_Historical_ListElement")]
     [DataContract]
-    public class OWM_Historical_ListElement
+    public class OWM_Historical_ListElement:HistoricalBase
     {
         public OWM_Historical_ListElement()
         {
             weather = new List<OWM_Historical_WeatherElement>();
+        }
+
+        public string ToCSV()
+        {
+            string retVal = "";
+
+            if(main!=null)
+            {
+                retVal+=main.ToCSV();
+            }
+            else
+            {
+                retVal += Separator;
+            }
+            if (wind != null)
+            {
+                retVal += wind.ToCSV();
+            }
+            else
+            {
+                retVal += Separator;
+            }
+            if (clouds != null)
+            {
+                retVal += clouds.ToCSV();
+            }
+            else
+            {
+                retVal += Separator;
+            }
+
+            if((weather!=null)||(weather.Count()>0))
+            {
+                foreach(var elem in weather)
+                {
+                    retVal += elem.ToCSV();
+                }
+            }
+            else
+            {
+                retVal += Separator;
+            }
+
+            retVal += dt + Separator;
+
+            return retVal;
         }
 
         [Key]

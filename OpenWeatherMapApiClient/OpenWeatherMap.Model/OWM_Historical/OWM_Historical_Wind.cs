@@ -11,9 +11,8 @@ namespace OpenWeatherMap.Model
 {
      [Table("OWM_Historical_Wind")]
     [DataContract]
-    public class OWM_Historical_Wind
+    public class OWM_Historical_Wind:HistoricalBase
     {
-         public string Separator = ";";
          public OWM_Historical_Wind()
          {
          }

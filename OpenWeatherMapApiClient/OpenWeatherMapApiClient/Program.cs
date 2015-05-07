@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenWeatherMapApi.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,8 +50,15 @@ namespace OpenWeatherMapApiClient
 
             args = new string[] { "/F" ,"/I","2514256" };
             argsCount = args.Length;
-           
-            System.Console.WriteLine("Arguments number: " + args.Length);
+
+            OpenWeatherMapApi.Domain.OWM_Base.DataMode mode=OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
+            Current_Domain current = new Current_Domain();
+            current.GetByCity(2514256, mode);
+            ForeCast3H_Domain foreCast = new ForeCast3H_Domain();
+            foreCast.GetByCity(2514256, mode);
+            Historical_Domain historical = new Historical_Domain();
+            historical.GetByCity(2514256, mode);
+            /*System.Console.WriteLine("Arguments number: " + args.Length);
             foreach (string arg in args)
             {
                 System.Console.WriteLine("Argument: " + arg);
@@ -156,7 +164,7 @@ namespace OpenWeatherMapApiClient
                 {
                     System.Console.WriteLine("Error en los parámetros...");
                 }
-            }
+            }*/
         }
     }
 }

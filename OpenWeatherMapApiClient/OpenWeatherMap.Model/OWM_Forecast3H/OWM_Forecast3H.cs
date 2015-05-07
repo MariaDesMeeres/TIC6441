@@ -13,9 +13,36 @@ namespace OpenWeatherMap.Model
     [DataContract]
     public class OWM_Forecast3H
     {
+         private string _separator = ";";
          public OWM_Forecast3H()
          {
              list = new List<OWM_Forecast3H_Forecast>();
+         }
+
+         public string ToCSV()
+         {
+             string retVal = "";
+
+             retVal = cod + _separator + message + _separator;
+
+             if(city!=null)
+             {
+                 retVal+= city.ToCSV();
+             }
+             retVal += _separator+cnt+_separator;
+
+             if((list!=null)&&(list.Count()>0))
+             {
+                 foreach(var elem in list)
+                 {
+                     retVal += elem.ToCSV();
+                 }
+             }
+             else
+             {
+                 retVal += _separator;
+             }
+             return retVal;
          }
 
          [Key]

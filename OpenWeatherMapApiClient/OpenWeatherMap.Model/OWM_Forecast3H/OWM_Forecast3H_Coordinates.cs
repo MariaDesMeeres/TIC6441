@@ -13,8 +13,18 @@ namespace OpenWeatherMap.Model
     [DataContract]
     public class OWM_Forecast3H_Coordinates
     {
+        private string _separator = ";";
         public OWM_Forecast3H_Coordinates()
         { }
+
+        public string ToCSV()
+        {
+            string retVal = "";
+
+            retVal = lon + _separator + lat + _separator;
+
+            return retVal;
+        }
 
         [Key]
         public int Id { get; set; }

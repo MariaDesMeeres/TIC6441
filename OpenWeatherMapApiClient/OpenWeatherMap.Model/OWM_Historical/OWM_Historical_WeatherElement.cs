@@ -11,11 +11,20 @@ namespace OpenWeatherMap.Model
 {
     [Table("OWM_Historical_WeatherElement")]
     [DataContract]
-    public class OWM_Historical_WeatherElement
+    public class OWM_Historical_WeatherElement:HistoricalBase
     {
         public OWM_Historical_WeatherElement()
         {
 
+        }
+
+        public string ToCSV()
+        {
+            string retVal = "";
+
+            retVal += id + Separator + main + Separator + description + Separator + icon + Separator;
+
+            return retVal;
         }
 
         [Key]

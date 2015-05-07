@@ -2,17 +2,48 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenWeatherMapApi.Domain
 {
-    public class ForeCast3H_Domain
+    public class ForeCast3H_Domain:OWM_Base
     {
         public OWM_Forecast3H _owm_forecast3h;
-        public ForeCast3H_Domain(OWM_Forecast3H foreCast3H)
+
+        public ForeCast3H_Domain():base()
+        {}
+        public ForeCast3H_Domain(OWM_Forecast3H foreCast3H):this()
         {
             _owm_forecast3h = foreCast3H;
+        }
+
+
+        public void GetByCity(ulong cityId, DataMode mode)
+        {
+            Url += "forecast?";
+            Url += "id=" + cityId;
+            Url += "&mode=" + GetDataModeStr(mode);
+            Url += "&units=metric";
+            //http://api.openweathermap.org/data/2.5/forecast?id=524901
+
+
+            try
+            {
+                base.GetResponse();
+                //CommonNetwork.GetResponseStringAndStream(url, out responseString, out responseStream);
+
+                DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(OWM_Forecast3H));
+
+                object objResponse = jsonSerializer.ReadObject(ResponseStream);
+
+                _owm_forecast3h = (OWM_Forecast3H)objResponse;
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error en GetCurrentDataByCityId: " + ex.Message);
+            }
         }
 
         public string ToString()

@@ -11,12 +11,22 @@ namespace OpenWeatherMap.Model
 {
      [Table("OWM_Historical_Snow")]
     [DataContract]
-    public class OWM_Historical_Snow
+    public class OWM_Historical_Snow:HistoricalBase
     {
          public OWM_Historical_Snow()
          {
 
          }
+
+         public string ToCSV()
+         {
+             string retVal = "";
+
+             retVal += h3 + Separator;
+
+             return retVal;
+         }
+
 
          [Key]
          public int Id { get; set; }

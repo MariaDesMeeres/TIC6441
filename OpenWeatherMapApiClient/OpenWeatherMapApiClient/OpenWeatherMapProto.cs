@@ -12,8 +12,7 @@ namespace OpenWeatherMapApiClient
 {
     class OpenWeatherMapProto
     {
-        public enum DataMode {JSON, XML };
-     
+      
         //*******************************CONSTRUCTOR***************************************
         public OpenWeatherMapProto()
         {
@@ -22,20 +21,9 @@ namespace OpenWeatherMapApiClient
 
 
         //**********************************************************************
-        private static string getDataModeStr(DataMode dm)
-        {
-            switch (dm)
-            {
-                case DataMode.JSON: return "JSON";
-                    break;
-                case DataMode.XML: return "XML";
-                    break;
-                default: return "JSON";
-                    break;
-            }
-        }
+       
 
-        public static string GetCurrentDataByCityId(ulong cityid, DataMode mode)
+        /*public static void GetCurrentDataByCityId(ulong cityid, DataMode mode)
         {
             string url = "http://api.openweathermap.org/data/2.5/weather?";
             url += "id=" + cityid;
@@ -67,8 +55,8 @@ namespace OpenWeatherMapApiClient
             }
 
             return responseString;
-
-        }
+           
+        }*/
 
 
         //**********************************************************************
@@ -82,7 +70,7 @@ namespace OpenWeatherMapApiClient
         // FORECAST 3H
         //**********************************************************************
         //**********************************************************************
-        public static string GetEvery3HoursForecastDataByCityId(ulong cityid, DataMode mode)
+        /*public static string GetEvery3HoursForecastDataByCityId(ulong cityid, DataMode mode)
         {
             string url = "http://api.openweathermap.org/data/2.5/forecast?";
             url += "id=" + cityid;
@@ -103,7 +91,7 @@ namespace OpenWeatherMapApiClient
 
                 OWM_Forecast3H forecast = (OWM_Forecast3H)objResponse;
 
-                ShowForecast3H(forecast);
+               // ShowForecast3H(forecast);
 
             }
             catch (Exception ex)
@@ -112,7 +100,7 @@ namespace OpenWeatherMapApiClient
             }
             
             return responseString;
-        }
+        }*/
 
 
         //**********************************************************************
@@ -127,7 +115,7 @@ namespace OpenWeatherMapApiClient
         //DAILY
         //**********************************************************************
         //**********************************************************************
-        public static string GetDailyForecastDataByCityId(ulong cityid, DataMode mode)
+        /*public static string GetDailyForecastDataByCityId(ulong cityid, DataMode mode)
         {
             string url = "http://api.openweathermap.org/data/2.5/forecast?";
             url += "id=" + cityid;
@@ -136,7 +124,7 @@ namespace OpenWeatherMapApiClient
             //http://api.openweathermap.org/data/2.5/forecast?id=524901
 
             return "";
-        }
+        }*/
 
 
         //**********************************************************************
@@ -144,9 +132,9 @@ namespace OpenWeatherMapApiClient
         //HISTORICAL
         //**********************************************************************
         //**********************************************************************
-        public static string GetDailyHistoricalDataByCityId(ulong cityid, DataMode mode)
+        public static void GetDailyHistoricalDataByCityId(ulong cityid)
         {
-            string url = "http://api.openweathermap.org/data/2.5/history/city?";
+            /*string url = "http://api.openweathermap.org/data/2.5/history/city?";
             url += "id=" + cityid;
             url += "&mode=" + getDataModeStr(mode);
             url += "&type=hour";
@@ -176,7 +164,8 @@ namespace OpenWeatherMapApiClient
                 System.Console.WriteLine("Error en GetEvery3HoursForecastDataByCityId: " + ex.Message);
             }
 
-            return responseString;
+            return responseString;*/
+    
 
         }
 
