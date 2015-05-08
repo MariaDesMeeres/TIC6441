@@ -11,8 +11,10 @@ namespace OpenWeatherMap.Model
 {
      [Table("OWM_Historical_Wind", Schema = "public")]
     [DataContract]
-    public class OWM_Historical_Wind:HistoricalBase
+    public class OWM_Historical_Wind
     {
+         protected const string Separator = ";";
+
          public OWM_Historical_Wind()
          {
          }
@@ -33,7 +35,7 @@ namespace OpenWeatherMap.Model
         {
             string retVal = "";
 
-            retVal = speed + Separator + gust + Separator + deg;
+            retVal = speed + Separator + gust + Separator + deg+Separator;
 
             return retVal;
         }

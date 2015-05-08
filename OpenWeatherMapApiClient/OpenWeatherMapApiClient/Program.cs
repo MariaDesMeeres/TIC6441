@@ -63,11 +63,11 @@ namespace OpenWeatherMapApiClient
 
             OpenWeatherMapApi.Domain.OWM_Base.DataMode mode=OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
             Current_Domain current = new Current_Domain();
-            current.GetByCity(2514256, mode);
+            current.GetByCity(retVal.Cities, mode);
             ForeCast3H_Domain foreCast = new ForeCast3H_Domain();
-            foreCast.GetByCity(2514256, mode);
+            foreCast.GetByCity(retVal.Cities, mode);
             Historical_Domain historical = new Historical_Domain();
-            historical.GetByCity(2514256, mode);
+            historical.GetByCity(retVal.Cities, mode);
            
         }
     }

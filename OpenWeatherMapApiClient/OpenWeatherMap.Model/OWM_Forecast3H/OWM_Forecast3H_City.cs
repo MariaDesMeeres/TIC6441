@@ -13,7 +13,7 @@ namespace OpenWeatherMap.Model
     [DataContract]
     public class OWM_Forecast3H_City
     {
-        private string _separator = ";";
+        protected const string _separator = ";";
         public OWM_Forecast3H_City()
         { }
 
@@ -26,8 +26,12 @@ namespace OpenWeatherMap.Model
             {
                 retVal += coord.ToCSV();
             }
+            else
+            {
+                retVal += _separator;
+            }
 
-            retVal +=_separator+ country + _separator + population;
+            retVal += country + _separator + population+_separator;
 
             return retVal;
         }

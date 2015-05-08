@@ -12,7 +12,7 @@ namespace OpenWeatherMap.Model
     [DataContract]
     public class OWM_Current_Weather
     {
-        private string _separator = ";";
+        protected const string _separator = ";";
         public OWM_Current_Weather()
         { }
 

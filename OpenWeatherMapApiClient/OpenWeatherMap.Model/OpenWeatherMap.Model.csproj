@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
-    <Compile Include="OWM_Historical\HistoricalBase.cs" />
+    <Compile Include="OWM_Current\Group_OWM_Current.cs" />
     <Compile Include="OWM_Historical\OWM_Historical_Snow.cs" />
     <Compile Include="OWM_Historical\OWM_Historical_Wind.cs" />
     <Compile Include="OWM_Historical\OWM_Historical_Main.cs" />

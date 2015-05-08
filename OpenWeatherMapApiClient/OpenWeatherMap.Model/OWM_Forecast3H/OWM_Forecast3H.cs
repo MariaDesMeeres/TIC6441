@@ -13,7 +13,7 @@ namespace OpenWeatherMap.Model
     [DataContract]
     public class OWM_Forecast3H
     {
-         private string _separator = ";";
+         protected const string _separator = ";";
          public OWM_Forecast3H()
          {
              list = new List<OWM_Forecast3H_Forecast>();
@@ -29,7 +29,11 @@ namespace OpenWeatherMap.Model
              {
                  retVal+= city.ToCSV();
              }
-             retVal += _separator+cnt+_separator;
+             else
+             {
+                 retVal += _separator;
+             }
+             retVal += cnt+_separator;
 
              if((list!=null)&&(list.Count()>0))
              {

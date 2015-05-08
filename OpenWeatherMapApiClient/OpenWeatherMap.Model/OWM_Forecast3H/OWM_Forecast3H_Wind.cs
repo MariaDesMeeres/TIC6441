@@ -13,7 +13,7 @@ namespace OpenWeatherMap.Model
     [DataContract]
     public class OWM_Forecast3H_Wind
     {
-        private string _separator = ";";
+        protected const string _separator = ";";
 
         public OWM_Forecast3H_Wind()
         { }

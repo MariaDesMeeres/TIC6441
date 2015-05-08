@@ -14,7 +14,7 @@ namespace OpenWeatherMap.Model
     public class OWM_Current_Clouds
     {
         [NotMapped]
-        public string Separator = ";";
+        protected const string Separator = ";";
         public OWM_Current_Clouds()
         {
 

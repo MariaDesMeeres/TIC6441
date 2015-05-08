@@ -20,10 +20,11 @@ namespace OpenWeatherMapApi.Domain
             _owm_Current = owm_Current;
         }
 
-        public void GetByCity(ulong cityId, DataMode mode)
+        public void GetByCity(List<ulong> cityId, DataMode mode)
         {
-            Url += "/weather?";
-            Url += "id=" + cityId;
+            string csvContent="";
+            Url += "/group?";
+            Url += "id=" + string.Join(",",cityId);
             Url += "&mode=" + GetDataModeStr(mode);
             Url += "&units=metric";
             //"http://api.openweathermap.org/data/2.5/weather?id=2514256&mode=xml&units=metric"
@@ -32,13 +33,17 @@ namespace OpenWeatherMapApi.Domain
             {
                 base.GetResponse();
 
-                DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(OWM_Current));
+                DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Group_OWM_Current));
 
                 object objResponse = jsonSerializer.ReadObject(ResponseStream);
 
-                OWM_Current current = (OWM_Current)objResponse;
-                current.clouds.Id = 3;
-                _context.OWM_Currents.Add(current);
+                Group_OWM_Current listcurrent = (Group_OWM_Current)objResponse;
+                foreach(var elem in listcurrent.list)
+                {
+                    csvContent += elem.ToCSV();
+                    _context.OWM_Currents.Add(elem);
+                }
+      
                 _context.SaveChanges();
             }
             catch(Exception ex)
@@ -53,7 +58,7 @@ namespace OpenWeatherMapApi.Domain
             retVal = "Respuesta: Cod: " + _owm_Current.cod + "; Dt: " + _owm_Current.dt+ newLine;
             retVal += "Id: " + _owm_Current.id + "; Name: " + _owm_Current.name+newLine;
             retVal += "Coord: Lon: " + _owm_Current.coord.lon + "; Lat: " + _owm_Current.coord.lat+newLine;
-            retVal +="Base: " + _owm_Current.@base+newLine;
+            retVal += "Base: " + _owm_Current.bbase + newLine;
 
             if (_owm_Current.weather != null)
             {

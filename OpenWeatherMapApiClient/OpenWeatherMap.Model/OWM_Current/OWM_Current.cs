@@ -12,7 +12,7 @@ namespace OpenWeatherMap.Model
     [DataContract]
     public class OWM_Current
     {
-        public string Separator = ";";
+        protected const string Separator = ";";
         public OWM_Current()
         {
             weather = new List<OWM_Current_Weather>();
@@ -21,18 +21,23 @@ namespace OpenWeatherMap.Model
         public string ToCSV() 
         {
             string retVal = "";
-            
-            if(coord!=null)
+
+            if (coord != null)
             {
                 retVal = coord.ToCSV();
             }
-            retVal += Separator;
-            if(sys!=null)
+            else
             {
-                retVal+= sys.ToCSV();
+                retVal += Separator;
             }
-            retVal += Separator;
-
+            if (sys != null)
+            {
+                retVal += sys.ToCSV();
+            }
+            else
+            {
+                retVal += Separator;
+            }
             if ((weather == null) || (weather.Count == 0))
             {
                 retVal += Separator;
@@ -41,31 +46,37 @@ namespace OpenWeatherMap.Model
             {
                 foreach (var elem in weather)
                 {
-                    retVal += elem.ToCSV() + Separator;
+                    retVal += elem.ToCSV();
                 }
             }
 
-            retVal += @base + Separator;
+            retVal += bbase + Separator;
 
             if(main!=null)
             {
                 retVal += main.ToCSV();
             }
-
-            retVal += Separator;
+            else
+            {
+                retVal += Separator;
+            }
             if(wind!=null)
             {
                 retVal += wind.ToCSV();
             }
-
-            retVal += Separator;
+            else
+            {
+                retVal += Separator;
+            }
 
             if(clouds!=null)
             {
                 retVal += clouds.ToCSV();
             }
-
-            retVal += Separator;
+            else
+            {
+                retVal += Separator;
+            }
 
             retVal += dt + Separator + id + Separator + name + Separator+cod+Separator;
  
@@ -83,8 +94,8 @@ namespace OpenWeatherMap.Model
         [DataMember]
         public virtual List<OWM_Current_Weather> weather { get; set; }
 
-        [DataMember]
-        public string @base { get; set; }
+        [DataMember(Name="@base")]
+        public string bbase { get; set; }
 
         [DataMember]
         public virtual OWM_Current_Main main { get; set; }
@@ -93,10 +104,10 @@ namespace OpenWeatherMap.Model
         public virtual OWM_Current_Wind wind { get; set; }
 
         
-        public int CurrentClouds_FK { get; set; }
+        //public int CurrentClouds_FK { get; set; }
 
         [DataMember]
-        [ForeignKey("CurrentClouds_FK")]
+        [ForeignKey("clouds_id")]
         public virtual OWM_Current_Clouds clouds { get; set; }
 
         [DataMember]

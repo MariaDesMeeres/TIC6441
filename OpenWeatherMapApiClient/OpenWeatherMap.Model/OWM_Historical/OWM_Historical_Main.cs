@@ -11,8 +11,10 @@ namespace OpenWeatherMap.Model
 {
     [Table("OWM_Historical_Main", Schema = "public")]
     [DataContract]
-    public class OWM_Historical_Main:HistoricalBase
+    public class OWM_Historical_Main
     {
+        protected const string Separator = ";";
+
         public OWM_Historical_Main()
         {
 

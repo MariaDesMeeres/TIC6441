@@ -11,8 +11,10 @@ namespace OpenWeatherMap.Model
 {
     [Table("OWM_Historical_ListElement", Schema = "public")]
     [DataContract]
-    public class OWM_Historical_ListElement:HistoricalBase
+    public class OWM_Historical_ListElement
     {
+        protected const string Separator = ";";
+
         public OWM_Historical_ListElement()
         {
             weather = new List<OWM_Historical_WeatherElement>();

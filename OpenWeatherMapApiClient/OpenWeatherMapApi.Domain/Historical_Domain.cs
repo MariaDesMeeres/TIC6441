@@ -21,10 +21,12 @@ namespace OpenWeatherMapApi.Domain
         public Historical_Domain():base()
         { }
 
-        public void GetByCity(ulong cityId, DataMode mode)
+        public void GetByCity(List<ulong> cities, DataMode mode)
         {
+            DataContractJsonSerializer jsonSerializer;
+            string tmpUrl = "";
             Url += "history/city?";
-            Url += "id=" + cityId;
+            string csv = "";
             Url += "&mode=" + GetDataModeStr(mode);
             Url += "&type=hour";
             Url += "&units=metrics";
@@ -33,14 +35,37 @@ namespace OpenWeatherMapApi.Domain
 
             try
             {
-                base.GetResponse();
+              
                 //CommonNetwork.GetResponseStringAndStream(url, out responseString, out responseStream);
+                tmpUrl = Url;
+                foreach(var city in cities)
+                {
+                    Url = tmpUrl;
+                    Url += "&id=" + city;
+                    base.GetResponse();
+                    jsonSerializer = new DataContractJsonSerializer(typeof(OWM_Historical));
 
-                DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(OWM_Forecast3H));
+                    object objResponse = jsonSerializer.ReadObject(ResponseStream);
 
-                object objResponse = jsonSerializer.ReadObject(ResponseStream);
+                    _historical = (OWM_Historical)objResponse;
+                    _context.OWM_Historicals.Add(_historical);
+                     csv += _historical.ToCSV();
+                }
 
-                _historical = (OWM_Historical)objResponse;
+              
+                /*OWM_Historical_WeatherElement s=new OWM_Historical_WeatherElement();
+                var l = new List<OWM_Historical_WeatherElement>();
+                l.Add(s);
+                 var elem=new OWM_Historical_ListElement()
+                 { 
+                      clouds=new OWM_Historical_Clouds(),
+                       main=new OWM_Historical_Main(),
+                        wind=new OWM_Historical_Wind(),
+                        weather=l
+                 };
+                 _historical.list.Add(elem);*/
+              
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {

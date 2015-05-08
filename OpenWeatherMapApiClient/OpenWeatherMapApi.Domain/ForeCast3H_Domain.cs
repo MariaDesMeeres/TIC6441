@@ -20,27 +20,33 @@ namespace OpenWeatherMapApi.Domain
         }
 
 
-        public void GetByCity(ulong cityId, DataMode mode)
+        public void GetByCity(List<ulong> cities, DataMode mode)
         {
+            string tmpUrl = "";
             Url += "forecast?";
-            Url += "id=" + cityId;
             Url += "&mode=" + GetDataModeStr(mode);
             Url += "&units=metric";
             //http://api.openweathermap.org/data/2.5/forecast?id=524901
-
-
+            DataContractJsonSerializer jsonSerializer;
+            string csv = "";
             try
             {
-                base.GetResponse();
-                //CommonNetwork.GetResponseStringAndStream(url, out responseString, out responseStream);
+                tmpUrl = Url;
+                foreach(var city in cities)
+                {
+                    Url = tmpUrl;
+                    Url +="&id=" + city;
+                    base.GetResponse();
+                    jsonSerializer = new DataContractJsonSerializer(typeof(OWM_Forecast3H));
 
-                DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(OWM_Forecast3H));
+                    object objResponse = jsonSerializer.ReadObject(ResponseStream);
 
-                object objResponse = jsonSerializer.ReadObject(ResponseStream);
+                    _owm_forecast3h = (OWM_Forecast3H)objResponse;
 
-                _owm_forecast3h = (OWM_Forecast3H)objResponse;
+                     csv+= _owm_forecast3h.ToCSV();
+                    _context.OWM_Forecast3H.Add(_owm_forecast3h);
+                }
 
-                _context.OWM_Forecast3H.Add(_owm_forecast3h);
                 _context.SaveChanges();
             }
             catch (Exception ex)
