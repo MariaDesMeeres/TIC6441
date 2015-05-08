@@ -39,6 +39,9 @@ namespace OpenWeatherMapApi.Domain
                 object objResponse = jsonSerializer.ReadObject(ResponseStream);
 
                 _owm_forecast3h = (OWM_Forecast3H)objResponse;
+
+                _context.OWM_Forecast3H.Add(_owm_forecast3h);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {

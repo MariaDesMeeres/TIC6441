@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenWeatherMap.Model
 {
-    [Table("OWM_Current_Wind")]
+    [Table("OWM_Current_Wind", Schema = "public")]
     [DataContract]
     public class OWM_Current_Wind
     {

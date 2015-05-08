@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenWeatherMap.Model
 {
-    [Table("OWM_Forecast3H_Forecast")]
+    [Table("OWM_Forecast3H_Forecast", Schema = "public")]
     [DataContract]
     public class OWM_Forecast3H_Forecast
     {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenWeatherMap.Model
 {
-     [Table("OWM_Historical_Snow")]
+     [Table("OWM_Historical_Snow", Schema = "public")]
     [DataContract]
     public class OWM_Historical_Snow:HistoricalBase
     {

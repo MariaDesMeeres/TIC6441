@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenWeatherMap.Model
 {
-    [Table("OWM_Current")]
+    [Table("OWM_Current", Schema = "public")]
     [DataContract]
     public class OWM_Current
     {
@@ -92,7 +92,11 @@ namespace OpenWeatherMap.Model
         [DataMember]
         public virtual OWM_Current_Wind wind { get; set; }
 
+        
+        public int CurrentClouds_FK { get; set; }
+
         [DataMember]
+        [ForeignKey("CurrentClouds_FK")]
         public virtual OWM_Current_Clouds clouds { get; set; }
 
         [DataMember]

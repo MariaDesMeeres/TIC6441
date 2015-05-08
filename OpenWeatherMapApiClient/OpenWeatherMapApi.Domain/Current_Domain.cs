@@ -22,7 +22,7 @@ namespace OpenWeatherMapApi.Domain
 
         public void GetByCity(ulong cityId, DataMode mode)
         {
-            Url = "/weather?";
+            Url += "/weather?";
             Url += "id=" + cityId;
             Url += "&mode=" + GetDataModeStr(mode);
             Url += "&units=metric";
@@ -37,6 +37,9 @@ namespace OpenWeatherMapApi.Domain
                 object objResponse = jsonSerializer.ReadObject(ResponseStream);
 
                 OWM_Current current = (OWM_Current)objResponse;
+                current.clouds.Id = 3;
+                _context.OWM_Currents.Add(current);
+                _context.SaveChanges();
             }
             catch(Exception ex)
             {
