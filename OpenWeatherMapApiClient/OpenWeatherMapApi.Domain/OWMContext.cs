@@ -18,6 +18,7 @@ namespace OpenWeatherMapApi.Domain
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Group_OWM_Current>().ToTable("Group_OWM_Current", "public");
             modelBuilder.Entity<OWM_Current>().ToTable("OWM_Current", "public");
             modelBuilder.Entity<OWM_Current_Clouds>().ToTable("OWM_Current_Clouds", "public");
             modelBuilder.Entity<OWM_Current_Coord>().ToTable("OWM_Current_Coord", "public");

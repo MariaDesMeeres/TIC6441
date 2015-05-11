@@ -23,7 +23,7 @@ namespace OpenWeatherMap.Model
          {
              string retVal = "";
 
-             retVal = cod + _separator + message + _separator;
+             retVal = CreatedAt+_separator+ cod + _separator + message + _separator;
 
              if(city!=null)
              {
@@ -51,6 +51,8 @@ namespace OpenWeatherMap.Model
 
          [Key]
          public int Id { get; set; }
+
+         public DateTime CreatedAt { get; set; }
 
         [DataMember]
          public string cod { get; set; }

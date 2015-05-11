@@ -1,10 +1,12 @@
-﻿using System;
+﻿using OpenWeatherMapApiClient;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace OpenWeatherMap.Common
 {
@@ -25,6 +27,19 @@ namespace OpenWeatherMap.Common
             ms.Position = 0;
             inputStream.Close();
             return ms;
+        }
+
+        public static Configuration ReadConfiguration()
+        {
+            Configuration retVal = new Configuration();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(Configuration));
+            StreamReader reader = new StreamReader("Configuration.xml");
+            retVal = (Configuration)serializer.Deserialize(reader);
+            reader.Close();
+
+
+            return retVal;
         }
 
 

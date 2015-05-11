@@ -1,8 +1,11 @@
-﻿using OpenWeatherMap.Common;
+﻿using log4net;
+using OpenWeatherMap.Common;
 using OpenWeatherMap.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +15,7 @@ namespace OpenWeatherMapApi.Domain
     public class Historical_Domain:OWM_Base
     {
         public OWM_Historical _historical;
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public Historical_Domain(OWM_Historical historical):this()
         {
@@ -48,11 +52,19 @@ namespace OpenWeatherMapApi.Domain
                     object objResponse = jsonSerializer.ReadObject(ResponseStream);
 
                     _historical = (OWM_Historical)objResponse;
+                    _historical.CreatedAt = DateTime.UtcNow;
                     _context.OWM_Historicals.Add(_historical);
-                     csv += _historical.ToCSV();
+                     csv += _historical.ToCSV()+Environment.NewLine;
                 }
+                string path="Historical-"+DateTime.Now.Year+".csv";
+              /*  if (!File.Exists(path))
+                {
+                    File.Create(path);
+                }*/
 
-              
+                StreamWriter wr = new StreamWriter(path, true);
+                wr.WriteLine(csv);
+                wr.Flush();
                 /*OWM_Historical_WeatherElement s=new OWM_Historical_WeatherElement();
                 var l = new List<OWM_Historical_WeatherElement>();
                 l.Add(s);
@@ -69,7 +81,7 @@ namespace OpenWeatherMapApi.Domain
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("Error en GetCurrentDataByCityId: " + ex.Message);
+                Log.Error(ex);
             }
         }
 

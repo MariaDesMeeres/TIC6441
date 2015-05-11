@@ -1,8 +1,11 @@
-﻿using OpenWeatherMap.Common;
+﻿using log4net;
+using OpenWeatherMap.Common;
 using OpenWeatherMap.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +15,7 @@ namespace OpenWeatherMapApi.Domain
     public class Current_Domain:OWM_Base
     {
         private OWM_Current _owm_Current;
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public Current_Domain()
         { }
         public Current_Domain(OWM_Current owm_Current)
@@ -22,7 +25,7 @@ namespace OpenWeatherMapApi.Domain
 
         public void GetByCity(List<ulong> cityId, DataMode mode)
         {
-            string csvContent="";
+            string path="",csvContent="";
             Url += "/group?";
             Url += "id=" + string.Join(",",cityId);
             Url += "&mode=" + GetDataModeStr(mode);
@@ -38,17 +41,24 @@ namespace OpenWeatherMapApi.Domain
                 object objResponse = jsonSerializer.ReadObject(ResponseStream);
 
                 Group_OWM_Current listcurrent = (Group_OWM_Current)objResponse;
-                foreach(var elem in listcurrent.list)
+                /*foreach(var elem in listcurrent.list)
                 {
                     csvContent += elem.ToCSV();
                     _context.OWM_Currents.Add(elem);
-                }
-      
+                }*/
+
+                listcurrent.CreatedAt = DateTime.UtcNow;
+                csvContent += listcurrent.ToCSV();
+                path = "Current-" + DateTime.Now.Year + ".csv"; 
+                StreamWriter wr = new StreamWriter(path, true);
+                wr.WriteLine(csvContent);
+
+                wr.Flush();
                 _context.SaveChanges();
             }
             catch(Exception ex)
             {
-
+                Log.Error(ex);
             }
 
         }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +12,8 @@ namespace OpenWeatherMap.Common
 {
     public static class CommonNetwork
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public static void GetResponseStringAndStream(string url, out string responseString, out Stream responseStream)
         {
             WebResponse response = GetResponse(url);
@@ -46,7 +50,7 @@ namespace OpenWeatherMap.Common
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("Error: " + ex.Message);
+                Log.Error(ex);
             }
             return response;
         }

@@ -24,7 +24,7 @@ namespace OpenWeatherMap.Model
         {
             string retVal = "";
 
-            retVal = message + Separator + cod + Separator + city_id + Separator + calctime + Separator + cnt + Separator;
+            retVal = message+Separator+CreatedAt + Separator + cod + Separator + city_id + Separator + calctime + Separator + cnt + Separator;
 
             if((list!=null)&&(list.Count()>0))
             {
@@ -42,6 +42,8 @@ namespace OpenWeatherMap.Model
         }
         [Key]
         public int Id { get; set; }
+
+        public DateTime CreatedAt { get; set; }
 
         [DataMember]
         public string message { get; set; }

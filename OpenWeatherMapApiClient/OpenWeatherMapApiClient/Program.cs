@@ -1,62 +1,31 @@
-﻿using OpenWeatherMapApi.Domain;
+﻿using log4net;
+using log4net.Config;
+using OpenWeatherMap.Common;
+using OpenWeatherMapApi.Domain;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Timers;
 using System.Xml.Serialization;
 
 namespace OpenWeatherMapApiClient
 {
     class Program
     {
-        public static string CURRENT1 = "/C";
-        public static string CURRENT2 = "/CURRENT";
-        
-        public static string FORECAST3H1 = "/F";
-        public static string FORECAST3H2 = "/FORECAST3H";
-        
-        public static string FORECASTDAILY1 = "/D";
-        public static string FORECASTDAILY2 = "/DAILY";
-
-        public static string HISTORICAL1 = "/H";
-        public static string HISTORICAL2 = "/HISTORICAL";
-
-        public static string CITYID1 = "/I";
-        public static string CITYID2 = "/CITYID";
-
-
+        Timer _currentTimer;
         public enum QUERYTYPE { NULL, CURRENT, FORECAST3H, FORECASTDAILY, HISTORICAL };
-
-        private static Configuration ReadConfiguration()
-        {
-            Configuration retVal = new Configuration();
-
-            XmlSerializer serializer = new XmlSerializer(typeof(Configuration));
-            StreamReader reader = new StreamReader("Configuration.xml");
-            retVal=(Configuration)serializer.Deserialize(reader);
-            reader.Close();
-
-
-            return retVal;
-        }
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         static void Main(string[] args)
         {
             int argsCount;
-            int argIndex;
-            QUERYTYPE querytype = QUERYTYPE.NULL;
-            string argUpper;
-            int numDaysForecastDaily;
-            ulong cityId = 0; 
-            string fileContent = "";
-
-            string filePrefix;
-            string strDate;
-            string filename;
+            XmlConfigurator.Configure();
+            Log.Debug("Starting application");
             DateTime now = DateTime.Now;
 
-            Configuration retVal= ReadConfiguration();
+            Configuration retVal= CommonFile.ReadConfiguration();
             args = new string[] { "/F" ,"/I","2514256" };
             argsCount = args.Length;
 
@@ -69,6 +38,37 @@ namespace OpenWeatherMapApiClient
             Historical_Domain historical = new Historical_Domain();
             historical.GetByCity(retVal.Cities, mode);
            
+        }
+
+        private void Run()
+        {
+            RunCurrentOwmTask();
+            RunForecast3HOwmTask();
+            RunHistoricalOwmTask();
+        }
+
+        private void RunCurrentOwmTask()
+        {
+            OpenWeatherMapApi.Domain.OWM_Base.DataMode mode = OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
+            Configuration retVal = (Configuration) CommonFile.ReadConfiguration();
+            Current_Domain current = new Current_Domain();
+            current.GetByCity(retVal.Cities, mode);
+        }
+
+        private void RunForecast3HOwmTask()
+        {
+            OpenWeatherMapApi.Domain.OWM_Base.DataMode mode = OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
+            Configuration retVal = CommonFile.ReadConfiguration();
+            ForeCast3H_Domain foreCast = new ForeCast3H_Domain();
+            foreCast.GetByCity(retVal.Cities, mode);
+        }
+
+        private void RunHistoricalOwmTask()
+        {
+            OpenWeatherMapApi.Domain.OWM_Base.DataMode mode = OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
+            Configuration retVal =CommonFile.ReadConfiguration();
+            Historical_Domain historical = new Historical_Domain();
+            historical.GetByCity(retVal.Cities, mode);
         }
     }
 }

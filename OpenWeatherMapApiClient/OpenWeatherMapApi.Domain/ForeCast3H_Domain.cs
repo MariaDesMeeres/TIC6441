@@ -1,7 +1,10 @@
-﻿using OpenWeatherMap.Model;
+﻿using log4net;
+using OpenWeatherMap.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +14,7 @@ namespace OpenWeatherMapApi.Domain
     public class ForeCast3H_Domain:OWM_Base
     {
         public OWM_Forecast3H _owm_forecast3h;
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public ForeCast3H_Domain():base()
         {}
         public ForeCast3H_Domain(OWM_Forecast3H foreCast3H):this()
@@ -22,7 +25,7 @@ namespace OpenWeatherMapApi.Domain
 
         public void GetByCity(List<ulong> cities, DataMode mode)
         {
-            string tmpUrl = "";
+            string path="",tmpUrl = "";
             Url += "forecast?";
             Url += "&mode=" + GetDataModeStr(mode);
             Url += "&units=metric";
@@ -42,16 +45,20 @@ namespace OpenWeatherMapApi.Domain
                     object objResponse = jsonSerializer.ReadObject(ResponseStream);
 
                     _owm_forecast3h = (OWM_Forecast3H)objResponse;
-
-                     csv+= _owm_forecast3h.ToCSV();
+                    _owm_forecast3h.CreatedAt = DateTime.UtcNow;
+                     csv+= _owm_forecast3h.ToCSV()+Environment.NewLine;
                     _context.OWM_Forecast3H.Add(_owm_forecast3h);
                 }
 
+                path = "ForeCast3H-" + DateTime.Now.Year + ".csv";
+                StreamWriter wr = new StreamWriter(path, true);
+                wr.WriteLine(csv);
+                wr.Flush();
                 _context.SaveChanges();
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("Error en GetCurrentDataByCityId: " + ex.Message);
+                Log.Error(ex);
             }
         }
 
