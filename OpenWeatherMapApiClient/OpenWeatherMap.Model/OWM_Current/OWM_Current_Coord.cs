@@ -26,7 +26,9 @@ namespace OpenWeatherMap.Model
 
             return retVal;
         }
-        public int Id { get; set; } 
+
+        public int Id { get; set; }
+
         [DataMember]
         public double lon { get; set; }
 

@@ -84,9 +84,10 @@ namespace OpenWeatherMapApi.Domain
             }
 
             retVal+= "Sys: Message:" + _owm_Current.sys.message + "; Country: " + _owm_Current.sys.country + "; Sunrise: " + _owm_Current.sys.sunrise + "; Sunset: " + _owm_Current.sys.sunset+newLine;
-            retVal+="Sys: Sunrise: " + CommonDate.UnixDateToString(_owm_Current.sys.sunrise) + "; Sunset: " + CommonDate.UnixDateToString(_owm_Current.sys.sunset)+newLine;
+            retVal+="Sys: Sunrise: " + _owm_Current.sys.sunrise + "; Sunset: " + _owm_Current.sys.sunset + newLine;
             retVal+= "Wind: Speed: " + _owm_Current.wind.speed + "; Deg: " + _owm_Current.wind.deg+newLine;
             retVal+= "Clouds: All: " + _owm_Current.clouds.all+newLine;
+
 
             return retVal;
         }

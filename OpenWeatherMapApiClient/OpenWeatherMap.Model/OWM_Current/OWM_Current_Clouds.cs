@@ -29,6 +29,7 @@ namespace OpenWeatherMap.Model
 
         [Key]
         public int Id { get; set; }
+
         [DataMember]
         public int all { get; set; }
     }

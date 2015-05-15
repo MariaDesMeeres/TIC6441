@@ -34,9 +34,9 @@ namespace OpenWeatherMap.Model
         public string country { get; set; }
 
         [DataMember]
-        public ulong sunrise { get; set; }
+        public int sunrise { get; set; }
 
         [DataMember]
-        public ulong sunset { get; set; }
+        public int sunset { get; set; }
     }
 }

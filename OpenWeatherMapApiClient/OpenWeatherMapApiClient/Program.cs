@@ -38,6 +38,7 @@ namespace OpenWeatherMapApiClient
             Historical_Domain historical = new Historical_Domain();
             historical.GetByCity(retVal.Cities, mode);*/
             Run();
+            Console.Read();
            
         }
 

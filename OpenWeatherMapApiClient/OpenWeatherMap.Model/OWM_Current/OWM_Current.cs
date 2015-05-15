@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -13,6 +14,7 @@ namespace OpenWeatherMap.Model
     public class OWM_Current
     {
         protected const string Separator = ";";
+
         public OWM_Current()
         {
             weather = new List<OWM_Current_Weather>();
@@ -94,7 +96,7 @@ namespace OpenWeatherMap.Model
         [DataMember]
         public virtual List<OWM_Current_Weather> weather { get; set; }
 
-        [DataMember(Name="@base")]
+        [DataMember(Name="base")]
         public string bbase { get; set; }
 
         [DataMember]
@@ -120,6 +122,6 @@ namespace OpenWeatherMap.Model
         public string name { get; set; }
 
         [DataMember]
-        public string cod { get; set; }
+        public int cod { get; set; }
     }
 }
