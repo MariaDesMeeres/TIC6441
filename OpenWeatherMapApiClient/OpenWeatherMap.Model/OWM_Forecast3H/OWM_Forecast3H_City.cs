@@ -40,7 +40,7 @@ namespace OpenWeatherMap.Model
         public int Id { get; set; }
 
         [DataMember]
-        public ulong id { get; set; }
+        public int id { get; set; }
 
         [DataMember]
         public string name { get; set; }
@@ -52,6 +52,6 @@ namespace OpenWeatherMap.Model
         public string country { get; set; }
 
         [DataMember]
-        public ulong population { get; set; }
+        public int population { get; set; }
     }
 }

@@ -82,6 +82,6 @@ namespace OpenWeatherMap.Model
         public virtual List<OWM_Historical_WeatherElement> weather { get; set; }
 
         [DataMember]
-        public ulong dt { get; set; }
+        public int dt { get; set; }
     }
 }

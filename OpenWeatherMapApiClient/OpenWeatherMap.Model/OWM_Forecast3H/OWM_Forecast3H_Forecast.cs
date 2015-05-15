@@ -16,6 +16,7 @@ namespace OpenWeatherMap.Model
         protected const string _separator = ";";
         public OWM_Forecast3H_Forecast()
         {
+            rain = new OWM_Forecast3H_Rain();
             weather = new List<OWM_Forecast3H_Weather>();
         }
 
@@ -79,13 +80,16 @@ namespace OpenWeatherMap.Model
         public int Id { get; set; }
 
         [DataMember]
-        public ulong dt;
+        public string dt;
 
         [DataMember]
         public string dt_txt;
 
         [DataMember]
         public virtual OWM_Forecast3H_Main main { get; set; }
+
+        [DataMember]
+        public virtual OWM_Forecast3H_Rain rain { get; set; }
 
         [DataMember]
         public virtual List<OWM_Forecast3H_Weather> weather { get; set; }

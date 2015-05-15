@@ -33,7 +33,7 @@ namespace OpenWeatherMap.Model
         public int Id { get; set; }
 
         [DataMember]
-        public ulong id { get; set; }
+        public int id { get; set; }
 
         [DataMember]
         public string main { get; set; }
