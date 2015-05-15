@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace OpenWeatherMap.Model
 {
     [Table("OWM_Current", Schema = "public")]
-    [DataContract]
+    [DataContract(Name = "OWM_Current")]
     public class OWM_Current
     {
         protected const string Separator = ";";
@@ -113,10 +113,10 @@ namespace OpenWeatherMap.Model
         public virtual OWM_Current_Clouds clouds { get; set; }
 
         [DataMember]
-        public ulong dt { get; set; }
+        public string dt { get; set; }
 
         [DataMember]
-        public ulong id { get; set; }
+        public int id { get; set; }
 
         [DataMember]
         public string name { get; set; }

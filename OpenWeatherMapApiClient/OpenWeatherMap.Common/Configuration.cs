@@ -13,6 +13,6 @@ namespace OpenWeatherMapApiClient
     {
         [XmlArray("Cities")]
         [XmlArrayItem("City")]
-        public List<ulong> Cities { get; set; }
+        public List<int> Cities { get; set; }
     }
 }
