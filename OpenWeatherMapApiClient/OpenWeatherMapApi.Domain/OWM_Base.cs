@@ -23,13 +23,16 @@ namespace OpenWeatherMapApi.Domain
             _context = new OWMContext();
         }
 
-        public void GetResponse()
+        public bool GetResponse()
         {
+            bool retVal = true;
             string responseString = "";
             Stream responseStream;
             CommonNetwork.GetResponseStringAndStream(Url, out responseString, out responseStream);
             ResponseStream = responseStream;
             ResponseString = responseString;
+
+            return retVal;
         }
 
         protected static string GetDataModeStr(DataMode dm)

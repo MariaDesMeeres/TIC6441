@@ -23,9 +23,10 @@ namespace OpenWeatherMapApi.Domain
         }
 
 
-        public void GetByCity(List<ulong> cities, DataMode mode)
+        public bool GetByCity(List<ulong> cities, DataMode mode)
         {
             string path="",tmpUrl = "";
+            bool retVal=true;
             Url += "forecast?";
             Url += "&mode=" + GetDataModeStr(mode);
             Url += "&units=metric";
@@ -34,6 +35,7 @@ namespace OpenWeatherMapApi.Domain
             string csv = "";
             try
             {
+               
                 tmpUrl = Url;
                 foreach(var city in cities)
                 {
@@ -58,8 +60,11 @@ namespace OpenWeatherMapApi.Domain
             }
             catch (Exception ex)
             {
+                retVal = false;
                 Log.Error(ex);
             }
+
+            return retVal;
         }
 
         public string ToString()

@@ -25,8 +25,9 @@ namespace OpenWeatherMapApi.Domain
         public Historical_Domain():base()
         { }
 
-        public void GetByCity(List<ulong> cities, DataMode mode)
+        public bool GetByCity(List<ulong> cities, DataMode mode)
         {
+            bool retVal = true;
             DataContractJsonSerializer jsonSerializer;
             string tmpUrl = "";
             Url += "history/city?";
@@ -81,8 +82,10 @@ namespace OpenWeatherMapApi.Domain
             }
             catch (Exception ex)
             {
+                retVal = false;
                 Log.Error(ex);
             }
+            return retVal;
         }
 
         public string ToString()

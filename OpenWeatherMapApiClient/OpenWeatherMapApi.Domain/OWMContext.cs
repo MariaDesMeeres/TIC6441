@@ -11,7 +11,7 @@ namespace OpenWeatherMapApi.Domain
     public class OWMContext:DbContext
     {
         public DbSet<OWM_Historical> OWM_Historicals{get;set;}
-        public DbSet<OWM_Current> OWM_Currents { get; set; }
+        public DbSet<Group_OWM_Current> OWM_Currents { get; set; }
         public DbSet<OWM_Forecast3H> OWM_Forecast3H { get; set; }
 
         public OWMContext() : base(nameOrConnectionString: "OWM") { }

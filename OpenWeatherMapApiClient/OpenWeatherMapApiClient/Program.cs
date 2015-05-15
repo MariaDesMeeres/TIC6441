@@ -30,45 +30,67 @@ namespace OpenWeatherMapApiClient
             argsCount = args.Length;
 
 
-            OpenWeatherMapApi.Domain.OWM_Base.DataMode mode=OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
+           /* OpenWeatherMapApi.Domain.OWM_Base.DataMode mode=OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
             Current_Domain current = new Current_Domain();
             current.GetByCity(retVal.Cities, mode);
             ForeCast3H_Domain foreCast = new ForeCast3H_Domain();
             foreCast.GetByCity(retVal.Cities, mode);
             Historical_Domain historical = new Historical_Domain();
-            historical.GetByCity(retVal.Cities, mode);
+            historical.GetByCity(retVal.Cities, mode);*/
+            Run();
            
         }
 
-        private void Run()
+        private static void Run()
         {
             RunCurrentOwmTask();
             RunForecast3HOwmTask();
             RunHistoricalOwmTask();
         }
 
-        private void RunCurrentOwmTask()
+        private static void RunCurrentOwmTask()
         {
+            int retries = 0;
+            bool updatedCity = false;
             OpenWeatherMapApi.Domain.OWM_Base.DataMode mode = OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
             Configuration retVal = (Configuration) CommonFile.ReadConfiguration();
             Current_Domain current = new Current_Domain();
-            current.GetByCity(retVal.Cities, mode);
+
+            while (updatedCity == false && retries < 3)
+            {
+                updatedCity = current.GetByCity(retVal.Cities, mode);
+                retries++;
+            }
         }
 
-        private void RunForecast3HOwmTask()
+        private static void RunForecast3HOwmTask()
         {
+            int retries = 0;
+            bool updatedCity = false;
             OpenWeatherMapApi.Domain.OWM_Base.DataMode mode = OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
             Configuration retVal = CommonFile.ReadConfiguration();
             ForeCast3H_Domain foreCast = new ForeCast3H_Domain();
-            foreCast.GetByCity(retVal.Cities, mode);
+
+            while (updatedCity == false && retries < 3)
+            {
+                updatedCity = foreCast.GetByCity(retVal.Cities, mode);
+                retries++;
+            }
         }
 
-        private void RunHistoricalOwmTask()
+        private static void RunHistoricalOwmTask()
         {
+            int retries = 0;
+            bool updatedCity = false;
             OpenWeatherMapApi.Domain.OWM_Base.DataMode mode = OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
             Configuration retVal =CommonFile.ReadConfiguration();
             Historical_Domain historical = new Historical_Domain();
-            historical.GetByCity(retVal.Cities, mode);
+
+            while (updatedCity == false && retries < 3)
+            {
+                updatedCity= historical.GetByCity(retVal.Cities, mode);
+                retries++;
+            }
         }
     }
 }

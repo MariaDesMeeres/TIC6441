@@ -23,8 +23,9 @@ namespace OpenWeatherMapApi.Domain
             _owm_Current = owm_Current;
         }
 
-        public void GetByCity(List<ulong> cityId, DataMode mode)
+        public bool GetByCity(List<ulong> cityId, DataMode mode)
         {
+            bool retVal = true;
             string path="",csvContent="";
             Url += "/group?";
             Url += "id=" + string.Join(",",cityId);
@@ -54,12 +55,15 @@ namespace OpenWeatherMapApi.Domain
                 wr.WriteLine(csvContent);
 
                 wr.Flush();
+                _context.OWM_Currents.Add(listcurrent);
                 _context.SaveChanges();
             }
             catch(Exception ex)
             {
+                retVal = false;
                 Log.Error(ex);
             }
+            return retVal;
 
         }
         public string ToString()
