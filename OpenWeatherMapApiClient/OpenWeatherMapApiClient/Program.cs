@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Timers;
 using System.Xml.Serialization;
 
@@ -15,7 +16,6 @@ namespace OpenWeatherMapApiClient
 {
     class Program
     {
-        Timer _currentTimer;
         public enum QUERYTYPE { NULL, CURRENT, FORECAST3H, FORECASTDAILY, HISTORICAL };
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         static void Main(string[] args)
@@ -61,6 +61,7 @@ namespace OpenWeatherMapApiClient
             {
                 updatedCity = current.GetByCity(retVal.Cities, mode);
                 retries++;
+                Thread.Sleep(1000);
             }
         }
 
@@ -76,6 +77,7 @@ namespace OpenWeatherMapApiClient
             {
                 updatedCity = foreCast.GetByCity(retVal.Cities, mode);
                 retries++;
+                Thread.Sleep(1000);
             }
         }
 
@@ -91,6 +93,7 @@ namespace OpenWeatherMapApiClient
             {
                 updatedCity= historical.GetByCity(retVal.Cities, mode);
                 retries++;
+                Thread.Sleep(1000);
             }
         }
     }

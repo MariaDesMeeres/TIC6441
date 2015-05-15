@@ -23,7 +23,7 @@ namespace OpenWeatherMapApi.Domain
         }
 
 
-        public bool GetByCity(List<ulong> cities, DataMode mode)
+        public bool GetByCity(List<int> cities, DataMode mode)
         {
             string path="",tmpUrl = "";
             bool retVal=true;

@@ -34,6 +34,14 @@ namespace OpenWeatherMap.Model
             {
                 retVal += _separator;
             }
+            if (rain != null)
+            {
+                retVal += rain.ToCSV();
+            }
+            else
+            {
+                retVal += _separator;
+            }
 
             if((weather==null)||(weather.Count==0))
             {

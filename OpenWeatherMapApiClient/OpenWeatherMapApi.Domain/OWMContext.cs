@@ -24,7 +24,7 @@ namespace OpenWeatherMapApi.Domain
             modelBuilder.Entity<OWM_Current_Coord>().ToTable("OWM_Current_Coord", "public");
             modelBuilder.Entity<OWM_Current_Main>().ToTable("OWM_Current_Main", "public");
             modelBuilder.Entity<OWM_Current_Sys>().ToTable("OWM_Current_Sys", "public");
-            modelBuilder.Entity<OWM_Current_Weather>().ToTable("OWM_Current_Weather", "public");
+            modelBuilder.Entity<OWM_Current_Weather>().ToTable("OWM_Current_Weather", "public").HasKey(x=>x.Id);
             modelBuilder.Entity<OWM_Current_Wind>().ToTable("OWM_Current_Wind", "public");
             modelBuilder.Entity<OWM_Forecast3H>().ToTable("OWM_Forecast3H", "public");
             modelBuilder.Entity<OWM_Forecast3H_City>().ToTable("OWM_Forecast3H_City", "public");
@@ -33,7 +33,7 @@ namespace OpenWeatherMapApi.Domain
             modelBuilder.Entity<OWM_Forecast3H_Forecast>().ToTable("OWM_Forecast3H_Forecast", "public");
             modelBuilder.Entity<OWM_Forecast3H_Main>().ToTable("OWM_Forecast3H_Main", "public");
             modelBuilder.Entity<OWM_Forecast3H_Sys>().ToTable("OWM_Forecast3H_Sys", "public");
-            modelBuilder.Entity<OWM_Forecast3H_Weather>().ToTable("OWM_Forecast3H_Weather", "public");
+            modelBuilder.Entity<OWM_Forecast3H_Weather>().ToTable("OWM_Forecast3H_Weather", "public").HasKey(x=>x.Id);
             modelBuilder.Entity<OWM_Forecast3H_Wind>().ToTable("OWM_Forecast3H_Wind", "public");
             modelBuilder.Entity<OWM_Historical>().ToTable("OWM_Historical", "public");
             modelBuilder.Entity<OWM_Historical_Clouds>().ToTable("OWM_Historical_Clouds", "public");

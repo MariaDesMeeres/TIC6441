@@ -68,3 +68,5 @@ C:\Users\Maria\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiCli
 C:\Users\Maria\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\obj\x86\Debug\OpenWeatherMapApiClient.csprojResolveAssemblyReference.cache
 C:\Users\Maria\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\obj\x86\Debug\OpenWeatherMapApiClient.exe
 C:\Users\Maria\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\obj\x86\Debug\OpenWeatherMapApiClient.pdb
+C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\Common.Log.dll
+C:\Users\sutaro\Source\Repos\TIC6441\OpenWeatherMapApiClient\OpenWeatherMapApiClient\bin\Debug\Common.Log.log4net.dll

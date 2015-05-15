@@ -13,5 +13,13 @@ namespace OpenWeatherMap.Model
         { }
         [DataMember(Name="3h")]
         public double h3{get;set;}
+
+        public string ToCSV()
+        {
+            string retval = "";
+
+            retval = h3.ToString();
+            return retval;
+        }
     }
 }

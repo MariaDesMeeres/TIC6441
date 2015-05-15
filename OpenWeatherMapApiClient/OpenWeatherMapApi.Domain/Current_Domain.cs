@@ -23,7 +23,7 @@ namespace OpenWeatherMapApi.Domain
             _owm_Current = owm_Current;
         }
 
-        public bool GetByCity(List<ulong> cityId, DataMode mode)
+        public bool GetByCity(List<int> cityId, DataMode mode)
         {
             bool retVal = true;
             string path="",csvContent="";
