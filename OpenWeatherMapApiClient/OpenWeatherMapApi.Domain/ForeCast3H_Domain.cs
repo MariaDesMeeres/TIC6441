@@ -31,6 +31,8 @@ namespace OpenWeatherMapApi.Domain
             Url += "&mode=" + GetDataModeStr(mode);
             Url += "&units=metric";
             //http://api.openweathermap.org/data/2.5/forecast?id=524901
+            path = "ForeCast3H-" + DateTime.Now.Year + ".csv";
+            StreamWriter wr = new StreamWriter(path, true);
             DataContractJsonSerializer jsonSerializer;
             string csv = "";
             try
@@ -49,19 +51,21 @@ namespace OpenWeatherMapApi.Domain
                     _owm_forecast3h = (OWM_Forecast3H)objResponse;
                     _owm_forecast3h.CreatedAt = DateTime.UtcNow;
                      csv+= _owm_forecast3h.ToCSV()+Environment.NewLine;
-                    _context.OWM_Forecast3H.Add(_owm_forecast3h);
+                     _context.OWM_Forecast3H.Add(_owm_forecast3h);
+                     _context.SaveChanges();
                 }
-
-                path = "ForeCast3H-" + DateTime.Now.Year + ".csv";
-                StreamWriter wr = new StreamWriter(path, true);
                 wr.WriteLine(csv);
-                wr.Flush();
-                _context.SaveChanges();
+             
             }
             catch (Exception ex)
             {
                 retVal = false;
                 Log.Error(ex);
+            }
+            finally
+            {
+                wr.Flush();
+                wr.Close();
             }
 
             return retVal;

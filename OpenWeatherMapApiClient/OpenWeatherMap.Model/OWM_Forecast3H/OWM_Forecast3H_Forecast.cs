@@ -13,6 +13,7 @@ namespace OpenWeatherMap.Model
     [DataContract]
     public class OWM_Forecast3H_Forecast
     {
+        private OWM_Forecast3H_Rain _rain;
         protected const string _separator = ";";
         public OWM_Forecast3H_Forecast()
         {
@@ -97,7 +98,14 @@ namespace OpenWeatherMap.Model
         public virtual OWM_Forecast3H_Main main { get; set; }
 
         [DataMember]
-        public virtual OWM_Forecast3H_Rain rain { get; set; }
+        public virtual OWM_Forecast3H_Rain rain
+        {
+            get
+            {
+                return _rain==null ? new OWM_Forecast3H_Rain():_rain;
+            }
+            set{_rain=value;}
+        }
 
         [DataMember]
         public virtual List<OWM_Forecast3H_Weather> weather { get; set; }

@@ -14,5 +14,14 @@ namespace OpenWeatherMapApiClient
         [XmlArray("Cities")]
         [XmlArrayItem("City")]
         public List<int> Cities { get; set; }
+
+        [XmlElement("RunForeCast")]
+        public bool RunForeCast { get; set; }
+
+        [XmlElement("RunCurrent")]
+        public bool RunCurrent { get; set; }
+        [XmlElement("RunHistorical")]
+        public bool RunHistorical { get; set; }
+        
     }
 }

@@ -37,7 +37,8 @@ namespace OpenWeatherMapApi.Domain
             Url += "&units=metrics";
             //http://api.openweathermap.org/data/2.5/history/city?id=2885679&type=hour
 
-
+            string path = "Historical-" + DateTime.Now.Year + ".csv";
+            StreamWriter wr = new StreamWriter(path, true);
             try
             {
               
@@ -55,35 +56,21 @@ namespace OpenWeatherMapApi.Domain
                     _historical = (OWM_Historical)objResponse;
                     _historical.CreatedAt = DateTime.UtcNow;
                     _context.OWM_Historicals.Add(_historical);
+                    _context.SaveChanges();
                      csv += _historical.ToCSV()+Environment.NewLine;
                 }
-                string path="Historical-"+DateTime.Now.Year+".csv";
-              /*  if (!File.Exists(path))
-                {
-                    File.Create(path);
-                }*/
-
-                StreamWriter wr = new StreamWriter(path, true);
+               
                 wr.WriteLine(csv);
-                wr.Flush();
-                /*OWM_Historical_WeatherElement s=new OWM_Historical_WeatherElement();
-                var l = new List<OWM_Historical_WeatherElement>();
-                l.Add(s);
-                 var elem=new OWM_Historical_ListElement()
-                 { 
-                      clouds=new OWM_Historical_Clouds(),
-                       main=new OWM_Historical_Main(),
-                        wind=new OWM_Historical_Wind(),
-                        weather=l
-                 };
-                 _historical.list.Add(elem);*/
-              
-                _context.SaveChanges();
             }
             catch (Exception ex)
             {
                 retVal = false;
                 Log.Error(ex);
+            }
+            finally
+            {
+                wr.Flush();
+                wr.Close();
             }
             return retVal;
         }

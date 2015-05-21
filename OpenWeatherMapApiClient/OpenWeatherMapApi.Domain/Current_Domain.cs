@@ -32,7 +32,7 @@ namespace OpenWeatherMapApi.Domain
             Url += "&mode=" + GetDataModeStr(mode);
             Url += "&units=metric";
             //"http://api.openweathermap.org/data/2.5/weather?id=2514256&mode=xml&units=metric"
-
+            StreamWriter wr=null;
             try
             {
                 base.GetResponse();
@@ -51,10 +51,10 @@ namespace OpenWeatherMapApi.Domain
                 listcurrent.CreatedAt = DateTime.UtcNow;
                 csvContent += listcurrent.ToCSV();
                 path = "Current-" + DateTime.Now.Year + ".csv"; 
-                StreamWriter wr = new StreamWriter(path, true);
+                wr = new StreamWriter(path, true);
                 wr.WriteLine(csvContent);
 
-                wr.Flush();
+               
                 _context.OWM_Currents.Add(listcurrent);
                 _context.SaveChanges();
             }
@@ -62,6 +62,11 @@ namespace OpenWeatherMapApi.Domain
             {
                 retVal = false;
                 Log.Error(ex);
+            }
+            finally
+            {
+                wr.Flush();
+                wr.Close();
             }
             return retVal;
 

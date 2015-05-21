@@ -16,37 +16,33 @@ namespace OpenWeatherMapApiClient
 {
     class Program
     {
-        public enum QUERYTYPE { NULL, CURRENT, FORECAST3H, FORECASTDAILY, HISTORICAL };
+        private static Configuration _configuration;
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         static void Main(string[] args)
         {
-            int argsCount;
             XmlConfigurator.Configure();
             Log.Debug("Starting application");
             DateTime now = DateTime.Now;
 
-            Configuration retVal= CommonFile.ReadConfiguration();
-            args = new string[] { "/F" ,"/I","2514256" };
-            argsCount = args.Length;
-
-
-           /* OpenWeatherMapApi.Domain.OWM_Base.DataMode mode=OpenWeatherMapApi.Domain.OWM_Base.DataMode.JSON;
-            Current_Domain current = new Current_Domain();
-            current.GetByCity(retVal.Cities, mode);
-            ForeCast3H_Domain foreCast = new ForeCast3H_Domain();
-            foreCast.GetByCity(retVal.Cities, mode);
-            Historical_Domain historical = new Historical_Domain();
-            historical.GetByCity(retVal.Cities, mode);*/
+            _configuration = CommonFile.ReadConfiguration();
             Run();
-            Console.Read();
-           
         }
 
         private static void Run()
         {
-            RunCurrentOwmTask();
-            RunForecast3HOwmTask();
-            RunHistoricalOwmTask();
+            if (_configuration.RunCurrent)
+            {
+                RunCurrentOwmTask();
+            }
+            if (_configuration.RunForeCast)
+            {
+                RunForecast3HOwmTask();
+            }
+            if (_configuration.RunHistorical)
+            {
+                RunHistoricalOwmTask();
+            }
+            
         }
 
         private static void RunCurrentOwmTask()
