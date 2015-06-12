@@ -89,10 +89,10 @@ namespace OpenWeatherMap.Model
         public int Id { get; set; }
 
         [DataMember]
-        public string dt;
+        public long dt { get; set; }
 
         [DataMember]
-        public string dt_txt;
+        public string dt_txt { get; set; }
 
         [DataMember]
         public virtual OWM_Forecast3H_Main main { get; set; }
